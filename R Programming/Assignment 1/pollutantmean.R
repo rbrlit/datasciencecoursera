@@ -1,8 +1,10 @@
-pollutantmean <- function(pollutant, id){
+pollutantmean <- function(directory, pollutant, id = 1:332){
+  data.import <- NULL
+  merged <- NULL
   for (i in id){
-    filename <- paste("specdata/", sprintf("%03d", i), ".csv", sep = "")
+    filename <- paste(directory, "/", sprintf("%03d", i), ".csv", sep = "")
     data.import <- read.csv(filename)
-    ## merged <- merge(merged, data.import)
+    merged <- rbind(merged, data.import)
   }
-  mean(data.import[ , pollutant], na.rm = T)
+  mean(merged[ , pollutant], na.rm = T)
 }
